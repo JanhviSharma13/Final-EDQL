@@ -1,0 +1,8 @@
+<configuration>
+    <input>
+        <net-file value="safdarjung_cleaned2.net.xml"/>
+    </input>
+    <output>
+        <output-file value="safdarjung_cleaned.net.xml"/>
+    </output>
+</configuration>

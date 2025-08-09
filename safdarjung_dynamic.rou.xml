@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<routes><vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="5.0" maxSpeed="70" color="1,0,0" /><vehicle id="rl_agent0" type="car" depart="0"><route edges="164810911#2 46323888#4" /></vehicle></routes>
