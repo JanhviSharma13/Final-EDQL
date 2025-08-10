@@ -76,7 +76,7 @@ def generate_trip_file(area_name: str, start_edge: str, goal_edge: str, output_d
 # CORE LOGIC
 # ----------------------------------------
 
-def find_longest_pair(net_file: str, vclass: str = DRIVABLE_VCLASS):
+def find_longest_pair(net_file: str, vclass: str = DRIVABLE_VCLASS, min_dist: float = MIN_ROUTE_DIST):
     print(f"\nProcessing {net_file} ...")
 
     # Load network
@@ -117,7 +117,7 @@ def find_longest_pair(net_file: str, vclass: str = DRIVABLE_VCLASS):
             continue
 
         for dst, dist in lengths.items():
-            if dist < MIN_ROUTE_DIST or dist <= longest_dist:
+            if dist < min_dist or dist <= longest_dist:
                 continue
             if dst not in paths or len(paths[dst]) <= 1:
                 continue
@@ -160,9 +160,6 @@ def main():
     parser.add_argument("--vclass", default=DRIVABLE_VCLASS, help="Vehicle class to consider (e.g., passenger)")
     args = parser.parse_args()
 
-    global MIN_ROUTE_DIST
-    MIN_ROUTE_DIST = args.min_dist
-
     config = {}
 
     for area in AREAS:
@@ -173,7 +170,7 @@ def main():
             print(f"❌ Missing network file: {net_file}")
             continue
 
-        pair, dist = find_longest_pair(net_file, vclass=args.vclass)
+        pair, dist = find_longest_pair(net_file, vclass=args.vclass, min_dist=args.min_dist)
         if pair:
             print(f"✅ {area_name}: {pair[0]} → {pair[1]} ({dist:.1f} m)")
             config[area_name] = {
